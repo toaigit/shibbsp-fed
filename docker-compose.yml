@@ -1,0 +1,22 @@
+version: '3.3'
+
+networks:
+  default:
+    external:
+      name: feddemoNET
+
+services:
+
+  shibb:
+        image: feddemo
+        container_name: feddemo
+        restart: always
+        ports:
+                - "80:80"
+                - "443:443"
+        volumes: 
+          - /home/toaivo/data/feddemo/html:/var/www/html
+          - /home/toaivo/data/feddemo/log/apache2:/var/log/apache2
+          - /home/toaivo/data/feddemo/log/shibboleth:/var/log/shibboleth
+          - /home/toaivo/data/feddemo/certs:/etc/apache2/certs
+          - /home/toaivo/data/feddemo/cgi-bin:/etc/apache2/cgi-bin

@@ -1,0 +1,102 @@
+Overview.
+
+When a user affiliated with one member of the InCommon federation tries to access a protected service operated by another member, the login process will take the user to a page where the user identify his/her home organization. The federation DS  will then redirects the user browser to the home organization for authentication.
+
+Building your Apache, Shibboleth, Embedded Discovery Service
+
+Update vars.env
+    SITENAME - this is your website name such as mysite.abc123.com
+    DATADIR - this is the directory where you have all your files that you dont want to be in the docker image
+    DOCKERIMAGE - this is the name of your docker image (docker image ls)
+    CONTAINER - this is the name of your running container (run time)
+    ACCTUID - this is the uid of your unix account when you startup your container.
+    NETWORK - a network name for your container
+    HTTP_PORT, HTTPS_PORT - are host ports to be specify in the docker compose file
+
+NOTES:
+    Here is the path defined in the container. You need to know this for your docker-compose volume mapping.
+       /secure/ /etc/apache2/cgi-bin/
+       DocumentRoot /var/www/html
+       Site certificate files are defined under /etc/apache2/certs/
+
+    The git repo also inludes the DS css, js, index.html file.  You may want to download the latest shibboleth-embedded Discovery Service from https://shibboleth.net/downloads/embedded-discovery-service/latest/. Compare the js, css , index.html file with the one included in this repository to see if there is any changes.
+  
+Run gen-vars.sh
+    This will generate apache, shibb configuration files, docker compose files, and 
+    startup script based on your vars.env file
+
+Register files/shibb/sp-metadata.xml to your IDP
+    The above script generate sp-metadata.xml file. 
+    Your EntityID name will be https://SITENAME/
+    Log a ticket to SAML team  to register this SP to InCommon Federation
+
+      Provide your sp-metadata.xml and the following information. 
+
+      <mdui:UIInfo>
+        <mdui:DisplayName xml:lang="en">Shibbsp-test.s.e Demo</mdui:DisplayName>
+        <mdui:Description xml:lang="en">SP Federation Demo</mdui:Description>
+        <mdui:InformationURL xml:lang="en">https://saml.stanford.edu</mdui:InformationURL>
+        <mdui:PrivacyStatementURL xml:lang="en">https://www.stanford.edu/site/privacy/</mdui:PrivacyStatementURL>
+        <mdui:Logo height="114" width="114" xml:lang="en">https://www-media.stanford.edu/assets/favicon/apple-touch-icon-114x114.png</mdui:Logo>
+      </mdui:UIInfo>
+
+     Go to spdb.stanford.edu and register your SP and slect YES for "This SP is already part of the InCommon Federation:
+
+Run build.sh (build container)
+    This script will build your docker image with Apache/Shibb and perlCGI module.
+    NOTE - there is no requirement to use perlCGI module.  You can install any CGI modules such as php, python, etc.
+
+Setup your local folders
+   copy your site certificates (cert, key, keychain) to the DATADIR/certs
+   copy any of your cgi scripts to DATADIR/cgi-bin
+   copy any of your html pages to DATADIR/html
+   NOTE - the build will create DATADIR/html/shibboleth-ds and copy shibboleth DS files
+
+Update the InCommon Discovery Service configuration for your environment.
+   The default Shibboleth DS configuration (idpselect_config.js) are under shibboleth-ds folder. 
+   You need to change the following 3 lines in the idpselect_config.js file to match your environment.
+       #  list institutions you want to show in the InCommon Discovery Login.
+       this.preferredIdP = ["urn:mace:incommon:stanford.edu", "urn:mace:incommon:duke.edu", "https://fed.huit.harvard.edu/idp/shibboleth"];
+       this.defaultReturn = "https://shibbsp-test.stanford.edu/Shibboleth.sso?entityID=urn:mace:incommon:stanford.edu&target=https://shibbsp-test.stanford.edu/secure/homepage";
+       this.returnWhiteList = [ "^https:\/\/shibbsp-test\.stanford\.edu\/Shibboleth\.sso\/Login.*$" , "^https:\/\/shibbsp-test\.stanford\.edu\/secure\/.*\.php$" ];
+
+Run startup  
+
+TIPS:
+
+You can use the default login provided by the InCommon Discovery Service (the shibboleth-ds/index.html). Or replace this default index.html with your own.
+
+When you access a shibboleth protected page, instead of taking the user to your institution SSO page, it will show the shibboleth-ds/index.html page.
+
+There are thousands of identity Provider joined the InCommon2, the initial InCommon DS Login page is kind of slow.  If you only need to make your application available to only some institutions, you can put these intitutions in your shibboleth2.xml file. For example:
+
+       <MetadataProvider type="XML" url="https://mdq.incommon.org/entities/idps/all" 
+                 backingFilePath="/var/log/shibboleth/incommon-idps-metadata.xml" reloadInterval="7200">
+            <MetadataFilter type="Whitelist">
+                <Include>urn:mace:incommon:duke.edu</Include>
+                <Include>urn:mace:incommon:stanford.edu</Include>
+                <Include>https://fed.huit.harvard.edu/idp/shibboleth</Include>
+            </MetadataFilter>
+        </MetadataProvider>
+
+Use Require shib-attr eppn to allow only certain Institution in your Apache Configuration
+
+       <Location /secure/>
+          AuthType shibboleth
+          ShibRequestSetting requireSession 1
+          Require shib-attr eppn ~ ^.+@(duke|harvard|stanford)\.edu$
+          # or you can use ShibAccessControl /path/to/acl.xml
+       </Location>
+       
+
+You can get all incommon SP metadata by downloading using curl -o all-sp.xml https://mdq.incommon.org/entities
+You can get all incommon idp metadata only using curl -o a.xml http://md.incommon.org/InCommon/InCommon-metadata-idp-only.xml
+
+To test if your SP has been registered with InCommon, you can just go to one of the Institution with the following URL
+   https://yourApp.stanford.edu/Shibboleth.sso/Login?SAMLDS=1&entityID=urn:mace:incommon:duke.edu
+   If you get the institution SSO page, then you are good.  Otherwise, you will get a message that their idp don't know anything about your SP.
+
+Other URL information:
+ https://www.incommon.org/community-organizations/
+ https://github.com/ConsortiumGARR/idem-tutorials
+

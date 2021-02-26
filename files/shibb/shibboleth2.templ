@@ -1,0 +1,79 @@
+<SPConfig xmlns="urn:mace:shibboleth:3.0:native:sp:config"
+    xmlns:conf="urn:mace:shibboleth:3.0:native:sp:config"
+    clockSkew="180">
+
+    <!-- To customize behavior, map hostnames and path components to applicationId and other settings. -->
+    <RequestMapper type="Native">
+        <RequestMap applicationId="default">
+            <Host name="{{.Env.SITENAME}}">
+                <Path name="secure" authType="shibboleth" requireSession="true"/>
+            </Host>
+        </RequestMap>
+    </RequestMapper>
+
+    <ApplicationDefaults id="default" policyId="default"
+        entityID="https://{{.Env.SITENAME}}/"
+        signing="true"
+        homeURL="https://{{.Env.SITENAME}}/secure/homepage"
+        REMOTE_USER="eppn persistent-id targeted-id">
+
+
+        <Sessions lifetime="7200" timeout="1800"
+           checkAddress="false" relayState="ss:mem" handlerURL="/Shibboleth.sso" handlerSSL="true" cookieProps="; path=/; secure; HttpOnly;SameSite=Lax"> 
+            <SSO discoveryProtocol="SAMLDS" 
+            <!-- This is your DS Login Page -->
+	    discoveryURL="https://{{.Env.SITENAME}}/shibboleth-ds/index.html" isDefault="true"> SAML2 </SSO>
+            
+            <Logout>SAML2 Local</Logout>
+
+            <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
+            <Handler type="Status" Location="/Status" acl="127.0.0.1"/>
+            <Handler type="Session" Location="/Session" showAttributeValues="false"/>
+            <Handler type="DiscoveryFeed" Location="/DiscoFeed"/>            
+        </Sessions>
+       
+        <Errors supportContact="yourteam@lists.stanford.edu"
+            logoLocation="/shibboleth-sp/logo.jpg"
+            styleSheet="/shibboleth-sp/main.css"/>
+
+
+        <!-- Download entire aggregate  -->
+        <MetadataProvider type="XML" url="https://mdq.incommon.org/entities/idps/all" 
+                 backingFilePath="/var/log/shibboleth/incommon-idps-metadata.xml" reloadInterval="7200">
+            <MetadataFilter type="Whitelist">
+                <!-- you specify only these institutions on your drop down list  -->
+                <Include>urn:mace:incommon:duke.edu</Include>
+                <Include>urn:mace:incommon:stanford.edu</Include>
+                <Include>https://fed.huit.harvard.edu/idp/shibboleth</Include>
+            </MetadataFilter>
+        </MetadataProvider>
+        
+        <!-- InCommon Per-Entity Metadata Distribution Service -->
+        <MetadataProvider type="MDQ" id="incommon" ignoreTransport="true" cacheDirectory="/var/cache/shibboleth/inc-mdq-cache" 
+            maxCacheDuration="86400" minCacheDuration="60"
+            baseUrl="https://mdq.incommon.org/">
+        <!-- Download from https://spaces.at.internet2.edu/display/MDQ/production+metadata+signing+key -->
+        <!-- Or directly from this link http://md.incommon.org/certs/inc-md-cert-mdq.pem -->
+        <MetadataFilter type="Signature" certificate="/etc/shibboleth/inc-md-cert-mdq.pem"/>
+        <MetadataFilter type="RequireValidUntil" maxValidityInterval="1209600"/>
+        </MetadataProvider>
+
+        <!-- Map to extract attributes from SAML assertions. --> 
+        <AttributeExtractor type="XML" validate="true" path="attribute-map.xml"/>
+
+        <!-- Use a SAML query if no attributes are supplied during SSO. --> 
+        <AttributeResolver type="Query" subjectMatch="true"/>
+
+        <!-- Default filtering policy for recognized attributes, lets other data pass. --> 
+        <AttributeFilter type="XML" validate="true" path="attribute-policy.xml"/>
+
+        <!-- Simple file-based resolver for using a single keypair. --> 
+        <CredentialResolver type="File" key="/etc/shibboleth/sp-key.pem" certificate="/etc/shibboleth/sp-cert.pem"/> 
+
+
+    </ApplicationDefaults>
+
+    <SecurityPolicyProvider type="XML" validate="true" path="security-policy.xml"/>   
+    <ProtocolProvider type="XML" validate="true" reloadChanges="false" path="protocols.xml"/>
+
+</SPConfig>

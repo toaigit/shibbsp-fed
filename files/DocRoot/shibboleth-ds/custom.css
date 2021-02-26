@@ -1,0 +1,37 @@
+.covid {
+  background-color: #efefef;
+  color: #665544;
+  }
+h3.covid {
+  cont-size:120%;
+  }
+
+.mybutton{
+   display:inline-block;
+   padding:0.5em 3em;
+   border:0.16em solid #8C1515;
+   margin:0 0.3em 0.3em 0;
+   box-sizing: border-box;
+   text-decoration:none;
+   text-transform:uppercase;
+   font-family:'Roboto',sans-serif;
+   font-weight:400;
+   color:#8C1515;
+   text-align:center;
+   transition: all 0.15s;
+}
+a.mybutton:hover{
+   color:#DDDDDD;
+   border-color:#DDDDDD;
+   background-color: #8C1515;
+}
+a.mybutton:active{
+   color:#BBBBBB;
+   border-color:#BBBBBB;
+}
+@media all and (max-width:30em){
+ a.mybutton{
+   display:block;
+   margin:0.4em auto;
+  }
+}

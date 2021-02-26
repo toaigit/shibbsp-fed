@@ -1,0 +1,90 @@
+.covid {
+  background-color: #efefef;
+  color: #665544;
+  }
+h3.covid {
+  cont-size:120%;
+  }
+
+.subutton{
+   display:inline-block;
+   padding:0.5em 3em;
+   border:0.16em solid #8C1515;
+   margin:0 0.3em 0.3em 0;
+   box-sizing: border-box;
+   background-color: #8C1515;
+   text-decoration:none;
+   text-transform:uppercase;
+   font-family:'Roboto',sans-serif;
+   font-weight:400;
+   color:#8C1515;
+   text-align:center;
+   transition: all 0.15s;
+}
+a.subutton:hover{
+   color:#DDDDDD;
+   border-color:#DDDDDD;
+   background-color: #FFFFFF;
+   color: #8C1515;
+}
+a.subutton:active{
+   color:#BBBBBB;
+   border-color:#BBBBBB;
+}
+@media all and (max-width:30em){
+ a.subutton, a.dukebutton{
+   display:block;
+   margin:0.4em auto;
+  }
+}
+.dukebutton{
+   display:inline-block;
+   padding:0.5em 3em;
+   border:0.16em solid #012169;
+   margin:0 0.3em 0.3em 0;
+   box-sizing: border-box;
+   background-color: #012169;
+   text-decoration:none;
+   text-transform:uppercase;
+   font-family:'Roboto',sans-serif;
+   font-weight:400;
+   color:#012169;
+   text-align:center;
+   transition: all 0.15s;
+}
+a.dukebutton:hover{
+   color:#DDDDDD;
+   border-color:#DDDDDD;
+   background-color: #FFFFFF;
+   color: #8C1515;
+}
+a.dukebutton:active{
+   color:#BBBBBB;
+   border-color:#BBBBBB;
+}
+
+.harvardbutton{
+   display:inline-block;
+   padding:0.5em 3em;
+   border:0.16em solid #A51C30;
+   margin:0 0.3em 0.3em 0;
+   box-sizing: border-box;
+   background-color: #A51C30;
+   text-decoration:none;
+   text-transform:uppercase;
+   font-family:'Roboto',sans-serif;
+   font-weight:400;
+   color:#A51C30;
+   text-align:center;
+   transition: all 0.15s;
+}
+a.harvardbutton:hover{
+   color:#DDDDDD;
+   border-color:#DDDDDD;
+   background-color: #FFFFFF;
+   color: #8C1515;
+}
+a.harvardbutton:active{
+   color:#BBBBBB;
+   border-color:#BBBBBB;
+}
