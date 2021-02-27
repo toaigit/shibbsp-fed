@@ -1,6 +1,6 @@
 Overview.
 
-When a user affiliated with one member of the InCommon federation tries to access a protected service operated by another member, the login process will take the user to a page where the user identify his/her home organization. The federation DS  will then redirects the user browser to the home organization for authentication.
+When an user affiliated with one member of the InCommon federation tries to access a protected service operated by another member, the login process will take the user to a page where the user identify his/her home organization. The federation DS  will then redirect the user's browser to the home organization for authentication.
 
 Building your Apache, Shibboleth, Embedded Discovery Service
 
@@ -26,7 +26,7 @@ Run gen-vars.sh
     startup script based on your vars.env file
 
 Register files/shibb/sp-metadata.xml to your IDP
-    The above script generate sp-metadata.xml file. 
+    The above gen-vars.sh script generates sp-metadata.xml file. 
     Your EntityID name will be https://SITENAME/
     Log a ticket to SAML team  to register this SP to InCommon Federation
 
@@ -44,13 +44,12 @@ Register files/shibb/sp-metadata.xml to your IDP
 
 Run build.sh (build container)
     This script will build your docker image with Apache/Shibb and perlCGI module.
-    NOTE - there is no requirement to use perlCGI module.  You can install any CGI modules such as php, python, etc.
+    NOTE - there is no requirement to use perlCGI module (testing purpose only).  You can install any CGI modules such as php, python, etc.
 
 Setup your local folders
    copy your site certificates (cert, key, keychain) to the DATADIR/certs
    copy any of your cgi scripts to DATADIR/cgi-bin
-   copy any of your html pages to DATADIR/html
-   NOTE - the build will create DATADIR/html/shibboleth-ds and copy shibboleth DS files
+   copy files/DocRoot to your html pages to DATADIR/html
 
 Update the InCommon Discovery Service configuration for your environment.
    The default Shibboleth DS configuration (idpselect_config.js) are under shibboleth-ds folder. 
@@ -61,10 +60,10 @@ Update the InCommon Discovery Service configuration for your environment.
        this.returnWhiteList = [ "^https:\/\/shibbsp-test\.stanford\.edu\/Shibboleth\.sso\/Login.*$" , "^https:\/\/shibbsp-test\.stanford\.edu\/secure\/.*\.php$" ];
 
 Run startup  
-
+Test https://yoursite/secure/homepage. This should bring up a Discovery page.  Click on one of the institution, you should see their SSO if your idp admin completed your SP registration to InCommon.
 TIPS:
 
-You can use the default login provided by the InCommon Discovery Service (the shibboleth-ds/index.html). Or replace this default index.html with your own.
+You can use the default login provided by the InCommon Discovery Service (yoursite/shibboleth-ds/index.html). Or replace this default index.html with your own.
 
 When you access a shibboleth protected page, instead of taking the user to your institution SSO page, it will show the shibboleth-ds/index.html page.
 
@@ -79,7 +78,7 @@ There are thousands of identity Provider joined the InCommon2, the initial InCom
             </MetadataFilter>
         </MetadataProvider>
 
-Use Require shib-attr eppn to allow only certain Institution in your Apache Configuration
+Use Require shib-attr eppn to limit access to a few Institutions (if desired) in your Apache Configuration
 
        <Location /secure/>
           AuthType shibboleth
