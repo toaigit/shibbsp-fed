@@ -2,7 +2,7 @@
 /* Change from 389 to 460    */
 #idpSelectIdPSelector
 {
-    width: 400px;
+    width: 450px;
     text-align: left;
     background-color: #FFFFFF;
     border: 2px #A40000 solid;
@@ -43,14 +43,14 @@ div.IdPSelectPreferredIdPButton
 div.IdPSelectPreferredIdPButton a
 {
     float: left;
-    width: 99%; /* Need a specified width otherwise we'll fit
+    width: 90%; /* Need a specified width otherwise we'll fit
                    the contents which we don't want because
                    they have auto margins */
     
 }
 div.IdPSelectTextDiv{
-    height: 3.5ex; /* Add some height to separate the text from the boxes */
-    font-size: 15px;
+    height: 3.5ex; /* Or select text - Add some height to separate the text from the boxes */
+    font-size: 16px;
     clear: left;
 }
 
@@ -89,7 +89,7 @@ div.IdPSelectPreferredIdPButton img
 div.IdPSelectPreferredIdPButton div.IdPSelectTextDiv
 {
     text-align: center;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: normal;
     max-width: 95%;
     height: 30px;       /* Specify max height to allow two lines.  The 
@@ -99,11 +99,12 @@ div.IdPSelectPreferredIdPButton div.IdPSelectTextDiv
 }
 
 /*
+ * This is Please select your organization
  * Force the size of the selectors and the buttons
  */
 #idpSelectInput, #idpSelectSelector
 {
-    width: 80%;
+    width: 75%;
 }
 /*
  * For some reason a <select> width includes the border and an
@@ -115,10 +116,11 @@ div.IdPSelectPreferredIdPButton div.IdPSelectTextDiv
     margin-right: 2px;
 
 }
+/* For Continue Button */
 #idpSelectSelectButton, #idpSelectListButton
 {
-    margin-left: 5px;
-    width: 16%;
+    margin-left: 3px;
+    width: 20%;
 }
 #idpSelectSelectButton
 {

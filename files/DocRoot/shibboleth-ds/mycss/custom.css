@@ -1,0 +1,64 @@
+.float-container {
+    border: 3px solid #fff;
+    text-decoration:none;
+    padding: 10px;
+}
+
+.float-child {
+    width: 100%;
+    height: 400px;
+    float: left;
+    padding: 20px;
+    text-decoration:none;
+    border: 0px solid #f2f2f2;
+    background-color: #DAD7CB;
+}  
+
+.float-child2 {
+    width: 60%;
+    height: 600px;
+    float: left;
+    padding: 20px;
+    text-decoration:none;
+    border: 0px solid #f2f2f2;
+    background-color: #59B3A9;
+}  
+.covid {
+  background-color: #efefef;
+  color: #665544;
+  }
+h3.covid {
+  cont-size:120%;
+  }
+
+.mybutton{
+   display:inline-block;
+   padding:0.5em .5em;
+   width:240px;
+   border:0.16em solid #f1f1f1;
+   margin:0 0.3em 0.3em 0;
+   box-sizing: border-box;
+   text-decoration:none;
+   text-transform:uppercase;
+   font-family:'Roboto',sans-serif;
+   font-weight:400;
+   color:#FFFFFF;
+   text-align:center;
+   transition: all 0.15s;
+}
+a.mybutton:hover{
+   color:#DDDDDD;
+   border-color:#DDDDDD;
+   text-decoration:none;
+   background-color: #8C1515;
+}
+a.mybutton:active{
+   color:#BBBBBB;
+   border-color:#BBBBBB;
+}
+@media all and (max-width:30em){
+ a.mybutton{
+   display:block;
+   margin:0.4em auto;
+  }
+}

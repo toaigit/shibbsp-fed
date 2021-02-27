@@ -1,126 +1,108 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-<head>
-  <title>IDP select test bed</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-5" />
-  <link rel="stylesheet" type="text/css" href="idpselect.css" />
-  <link rel="stylesheet" type="text/css" href="custom.css" />
-  <link href="https://www-media.stanford.edu/su-identity/css/su-identity.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet" type="text/css">
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  <!--[if IE 8]>
-  <link rel="stylesheet" type="text/css" href="https://www-media.stanford.edu/su-identity/css/ie/ie8.css" />
-  <![endif]-->
-  <!--[if IE 7]>
-  <link rel="stylesheet" type="text/css" href="https://www-media.stanford.edu/su-identity/css/ie/ie7.css" />
-  <![endif]-->
-</head>
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="icon" href="https://login.stanford.edu/idp/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://login.stanford.edu/idp/favicon.ico" type="image/x-icon">
+    <script src="mycss/jquery-1.js"></script>
+    <!-- bootstrap -->
+    <link type="text/css" rel="stylesheet" href="mycss/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="mycss/su-identity.css">
+    <link rel="stylesheet" type="text/css" href="idpselect.css" />
+    <link rel="stylesheet" type="text/css" href="mycss/custom.css" />
+    <!--[if lt IE 9]>
+    <script src="/idp/js/html5.js"></script>
+    <![endif]-->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/idp/css/ie8.css" />
+    <![endif]-->
+    <!--[if IE 7]>
+    <link rel="stylesheet" type="text/css" href="/idp/css/ie7.css" />
+    <![endif]-->
+    <script src="mycss/login.js"></script>
+    <!-- login CSS -->
+    <title>Stanford Logout</title>
+  </head>
+  <body>
+    <div id="su-wrap">
+      <!-- #su-wrap start -->
+      <div id="su-content">
+        <!-- #su-content start -->
+        <!-- Brandbar snippet start -->
+        <div id="brandbar">
+          <div class="container">
+            <a href="http://www.stanford.edu/"> <img src="mycss/brandbar-stanford-logo2x.png" alt="Stanford University" width="153" height="22"> </a>
+          </div>
+          <!-- .container end -->
+        </div>
+        <!-- #brandbar end -->
+        <!-- Brandbar snippet end -->
 
-<body>
+        <div id="header">
+          <div class="container">
+            <div id="logo">
+              <img src="mycss/login-header2x.png" alt="Stanford Login" width="222" height="37"> 
+            </div>
+          </div>
+          <!-- /.container -->
+        </div>
 
-  <div id="su-wrap"> <!-- #su-wrap start -->
-    <div id="su-content"> <!-- #su-content start -->  
+        <div id="content">
+          <div class="container">
+            <div class="row">
+                <div class="col-md-8" style="background-color: #F1F1F1;">
+                      <center><h1 class="pagetitle">SP Federation Login</h1></center>
+                      <hr style="height:3px;color:#C81515;background-color:#C81515">
+                      <div class="info-box" style="background-color: #F1F1F1;">
+                      <center>
+                         <div id="idpSelect"></div>
+                         <script src="idpselect_config.js" type="text/javascript" language="javascript"></script>
+                         <script src="idpselect.js" type="text/javascript" language="javascript"></script>
+                      </center>
+                </div>
+                <hr style="height:3px;color:#C81515;background-color:#C81515">
+                <p class="fineprint" style="padding: k0px;">Use of this system is subject to Stanford University's rules and regulations. See the <a href="https://adminguide.stanford.edu/chapter-6" target="_blank" title="Stanford University Administrative Guide">Stanford Administrative Guide</a> for more information.</p>
+              </div>
+            </div>
+            <!--  end of div class row -->
+            <div class="row">
+                <div class="col-md-8">
+            </div>
+         </div>
+          <!-- .container end -->
+        </div>
+        <!-- .content end -->
+      </div>
+      <!-- #su-content end -->
+    </div>
+    <!-- #su-wrap end -->
 
-
-  <!-- Brandbar snippet start -->
-<div id="brandbar">
-  <div class="container">
-  <a href="http://www.stanford.edu">
-    <img src="https://www-media.stanford.edu/su-identity/images/brandbar-stanford-logo@2x.png" alt="Stanford University" width="152" height="23">
-  </a>
-  </div> <!-- .container end -->
-  </div> <!-- #brandbar end -->
-  <!-- Brandbar snippet end -->
-    <!--=== Header ===-->
-    <div id="header" class="clearfix" role="banner">
+    <!-- Global footer snippet start -->
+    <div id="global-footer" style="margin-top: 467px;">
       <div class="container">
         <div class="row">
-          <div class="col-md-8"> 
-            <!-- Logo -->
-<!--
-  <div class="covid">
-      <center>
-      <p>&nbsp; </p>
-      <p><a href="edu" class="mybutton">More about Stanford's response to COVID-19</a>
-      <p>&nbsp; </p>
-      </center>
-  </div>
--->
-            <div id="logo" class="clearfix"> 
-                <center><p style="font-size:200%">SP Federation Login Demo</p></center>
-            </div>
-            <!-- /logo -->
+          <div class="col-xs-6 col-sm-2" id="bottom-logo"> <a href="https://www.stanford.edu/"> <img alt="Stanford University" src="mycss/footer-stanford-logo2x.png" width="105" height="49"> </a> </div>
+          <!-- #bottom-logo end -->
+          <div class="col-xs-6 col-sm-10" id="bottom-text">
+            <ul class="list-inline">
+              <li class="home"><a href="https://www.stanford.edu/">SU Home</a></li>
+              <li class="maps alt"><a data-ua-label="global-footer" data-ua-action="visit.stanford.edu/plan/maps" class="su-link" href="http://visit.stanford.edu/plan/maps.html">Maps &amp; Directions</a></li>
+              <li class="search-stanford"><a href="http://stanford.edu/search/">Search Stanford</a></li>
+              <li class="terms alt"><a href="http://www.stanford.edu/site/terms.html">Terms of Use</a></li>
+              <li class="emergency-info"><a data-ua-label="global-footer" class="su-link" href="http://emergency.stanford.edu/">Emergency Info</a></li>
+            </ul>
           </div>
+          <!-- .bottom-text end -->
+          <p class="copyright vcard col-sm-10 col-sm-offset-2 col-xs-12">© <span class="fn org">Stanford University</span>.&nbsp; <span class="adr"> <span class="locality">Stanford</span>, <span class="region">California</span> <span class="postal-code">94305</span></span>. <span id="termsofuse"><a data-ua-label="global-footer" data-ua-action="copyright-complaints" class="su-link" href="http://www.stanford.edu/group/security/dmca.html">Copyright Complaints</a>&nbsp;&nbsp;&nbsp;<a data-ua-label="global-footer" data-ua-action="trademark-notice" class="su-link" href="https://adminguide.stanford.edu/chapter-1/subchapter-5/policy-1-5-4">Trademark Notice</a></span></p>
         </div>
+        <!-- .row end -->
       </div>
+      <!-- .container end -->
     </div>
 
-  <center>
-  <div id="idpSelect"></div>
-  <script src="idpselect_config.js" type="text/javascript" language="javascript"></script>
-  <script src="idpselect.js" type="text/javascript" language="javascript"></script>
-  </center>
-  <center>Click <a href=/shibboleth-ds/login2/>here</a> to see custom login #2
-  <center>Click <a href=/shibboleth-ds/login3/>here</a> to see custom login #3
-  </center>
-  <noscript>
-    <!-- If you need to care about non javascript browsers you will need to 
-         generate a hyperlink to a non-js DS.
+    <!-- global-footer end -->
+  
 
-         To build you will need:
-             - URL:  The base URL of the DS you use
-             - EI: Your entityId, URLencoded.  You can get this from the line that 
-               this page is called with.
-             - RET: Your return address dlib-adidp.ucs.ed.ac.uk. Again you can get
-               this from the page this is called with, but beware of the 
-               target%3Dcookie%253A5269905f bit..
-
-        < href=${URL}?entityID=${EI}&return=${RET}
-     -->
-
-    Your Browser does not support javascript. Please use 
-    <a href="http://federation.org/DS/DS?entityID=https%3A%2F%2FyourentityId.edu.edu%2Fshibboleth&return=https%3A%2F%2Fyourreturn.edu%2FShibboleth.sso%2FDS%3FSAMLDS%3D1%26target%3Dhttps%3A%2F%2Fyourreturn.edu%2F">this link</a>.
-
-  </noscript>
-</div> <!-- #su-content end -->
-</div> <!-- #su-wrap end -->
-
-<!-- Global footer snippet start -->
-<div id="global-footer">
-<div class="container">
-<div class="row">
-  <div id="bottom-logo" class="span2">
-    <a href="https://www.stanford.edu">
-      <img src="https://www-media.stanford.edu/su-identity/images/footer-stanford-logo@2x.png" alt="Stanford University" width="105" height="49"/>
-    </a>
-  </div>
-  <!-- #bottom-logo end -->
-  <div id="bottom-text" class="span10">
-    <ul>
-      <li class="home"><a href="https://www.stanford.edu">Stanford Home</a></li>
-      <li class="maps alt"><a href="https://visit.stanford.edu/plan/">Maps & Directions</a></li>
-      <li class="search-stanford"><a href="https://www.stanford.edu/search/">Search Stanford</a></li>
-      <li class="emergency alt"><a href="https://emergency.stanford.edu">Emergency Info</a></li>
-    </ul>
-    <ul id="policy-links">
-      <li><a href="https://www.stanford.edu/site/terms/" title="Terms of use for sites">Terms of Use</a></li>
-      <li><a href="https://www.stanford.edu/site/privacy/" title="Privacy and cookie policy">Privacy</a></li>
-      <li><a href="https://uit.stanford.edu/security/copyright-infringement" title="Report alleged copyright infringement">Copyright</a></li>
-      <li><a href="https://adminguide.stanford.edu/chapter-1/subchapter-5/policy-1-5-4" title="Ownership and use of Stanford trademarks and images">Trademarks</a></li>
-      <li><a href="http://exploredegrees.stanford.edu/nonacademicregulations/nondiscrimination/" title="Non-discrimination policy">Non-Discrimination</a></li>
-      <li><a href="https://www.stanford.edu/site/accessibility" title="Report web accessibility issues">Accessibility</a></li>
-    </ul>
-  </div> <!-- .bottom-text end -->
-  <div class="clear"></div>
-  <p class="copyright vcard">&copy; <span class="fn org">Stanford University</span>, <span class="adr"> <span class="locality">Stanford</span>, <span class="region">California</span> <span class="postal-code">94305</span></span>.
-  </p>
-</div> <!-- .row end -->
-</div> <!-- .container end -->
-</div> <!-- global-footer end -->
-<!-- Global footer snippet end -->  
-</body>
-</html>
-
+</body></html>
