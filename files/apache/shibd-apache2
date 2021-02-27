@@ -2,4 +2,5 @@
 
 /etc/init.d/shibd start
 exec apache2ctl -D FOREGROUND
-
+# if you want to start apache as a non root user, you need to change the port 80 and 443 to numbers greater than 1024 (1080, 1443).
+# and replace exec with su userid -c "exec apache2ctl -D FOREGROUND"
